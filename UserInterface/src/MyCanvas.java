@@ -12,8 +12,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 
 
-public class MyCanvas extends Canvas implements KeyListener,
-                                                MouseListener,
+public class MyCanvas extends Canvas implements MouseListener,
                                                 MouseMotionListener{
     
     int x1, y1, x2, y2;
@@ -21,7 +20,6 @@ public class MyCanvas extends Canvas implements KeyListener,
     
     public MyCanvas(){
         this.setBounds(6, 6, 200, 200); 
-        addKeyListener(this);
         addMouseListener(this);
         addMouseMotionListener(this);
         
@@ -83,21 +81,6 @@ public class MyCanvas extends Canvas implements KeyListener,
 
     @Override
     public void mouseMoved(MouseEvent e) {
-    
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-    
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
     
     }
 }
