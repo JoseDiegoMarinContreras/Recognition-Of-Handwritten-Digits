@@ -26,7 +26,7 @@ public class MyCanvas extends Canvas implements MouseListener,
     Graphics2D graphics2D;
     
     public MyCanvas(){
-        this.setBounds(6, 6, 216, 216); 
+        this.setBounds(6, 6, 224, 224); 
         addMouseListener(this);
         addMouseMotionListener(this);
         
