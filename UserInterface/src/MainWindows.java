@@ -138,12 +138,13 @@ public class MainWindows extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
+            lienzo.generateImage();
             String pathAnaconda3 = "C:\\Users\\JoseSantiago\\Anaconda3\\python.exe";
             Runtime runtime = Runtime.getRuntime();            
             String[] cmd = new String[3];
             cmd[0] = "cmd.exe" ;
             cmd[1] = "/C";
-            cmd[2] = pathAnaconda3+" ..\\Model\\Model.py";
+            cmd[2] = pathAnaconda3+" \"..\\Predict Model\\Predict.py\"";
             Process proc = runtime.exec(cmd);
 		
             InputStream is = proc.getInputStream();

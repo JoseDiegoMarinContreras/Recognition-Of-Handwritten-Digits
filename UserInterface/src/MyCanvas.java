@@ -8,6 +8,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 
@@ -18,14 +22,37 @@ public class MyCanvas extends Canvas implements MouseListener,
     int x1, y1, x2, y2;
     Color c;
     
+    BufferedImage bufferImage;
+    Graphics2D graphics2D;
+    
     public MyCanvas(){
-        this.setBounds(6, 6, 200, 200); 
+        this.setBounds(6, 6, 216, 216); 
         addMouseListener(this);
         addMouseMotionListener(this);
         
         x1 = x2 = y1 = y2 = -1;
         c = Color.WHITE;
         setBackground(Color.BLACK);
+        createBurrerImage();
+    }
+    
+    public void createBurrerImage(){
+        bufferImage = new BufferedImage(getSize().width, getSize().height, BufferedImage.TYPE_INT_ARGB);  
+        graphics2D = (Graphics2D)bufferImage.getGraphics();
+        
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.fillRect(0, 0, getSize().width, getSize().height);
+        graphics2D.setStroke(new BasicStroke(6.6f));
+    }
+    
+    public void generateImage(){
+        graphics2D.dispose();
+        try{
+            ImageIO.write(bufferImage,"png",new File("temp.jpg"));
+        }catch (Exception e) {
+            
+        }
+        createBurrerImage();
     }
     
     @Override
@@ -34,10 +61,11 @@ public class MyCanvas extends Canvas implements MouseListener,
         
         g2D.setStroke(new BasicStroke(6.6f));
         g2D.setColor(c);
+        graphics2D.setColor(c);
         
         if(x1 != -1 && x2 != -1){
             g2D.drawLine(x1, y1, x2, y2);
-        
+            graphics2D.drawLine(x1, y1, x2, y2);
         }
         
     }
@@ -51,7 +79,7 @@ public class MyCanvas extends Canvas implements MouseListener,
     public void mousePressed(MouseEvent e) {
         x1 = e.getX();
         y1 = e.getY();
-        paint(this.getGraphics());
+        paint(getGraphics());
     }
 
     @Override
@@ -74,7 +102,7 @@ public class MyCanvas extends Canvas implements MouseListener,
     public void mouseDragged(MouseEvent e) {
         x2 = e.getX();
         y2 = e.getY();
-        paint(this.getGraphics());
+        paint(getGraphics());
         x1 = x2;
         y1 = y2;
     }
